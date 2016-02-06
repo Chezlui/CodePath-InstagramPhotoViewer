@@ -28,5 +28,8 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.9'
     // Downloads remote images into imageviews
     compile 'com.squareup.picasso:picasso:2.5.2'
+    // For SwipeRefreshLayout
+    compile 'com.android.support:support-v4:23.1.1'
+
 
 }

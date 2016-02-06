@@ -1,6 +1,7 @@
 package es.quizit.chezlui.instagramphotoviewer;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,11 +23,21 @@ public class PhotosActivity extends AppCompatActivity {
     public static final String CLIENT_ID = "e05c462ebd86446ea48a5af73769b602";
     private ArrayList<InstagramPhoto> photos;
     InstagramPhotosAdapter aPhotos;
+    SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos);
+
+        // SwipeRefreshLayout
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchPopularPhotos();
+            }
+        });
         // SEND OUT API REQUEST to POPULAR PHOTOS
         photos = new ArrayList<>();
         // create the adapter linking it to the sources
@@ -59,6 +70,7 @@ public class PhotosActivity extends AppCompatActivity {
                 // Expecting a JSON object
 
                 JSONArray photosJson = null;
+                aPhotos.clear();
                 try {
                     photosJson = response.getJSONArray("data");
                     // Iterate array of photos
@@ -90,7 +102,7 @@ public class PhotosActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
+                swipeContainer.setRefreshing(false);
                 // Callback
                 aPhotos.notifyDataSetChanged();
             }
