@@ -96,6 +96,17 @@ public class PhotosActivity extends AppCompatActivity {
                         photo.likesCount = photoJson.getJSONObject("likes").getInt("count");
                         // - Caption { data => [x] => "caption" => "text" }
                         photo.caption = photoJson.getJSONObject("caption").getString("text");
+                        // Comment { data => [x] => "comments" => [x] => "data"}
+                        JSONArray comments = photoJson.getJSONObject("comments").getJSONArray("data");
+                        photo.comments = new ArrayList<Comment>();
+                        for (int j = 0; j < comments.length(); j++) {
+                            Comment comment = new Comment();
+
+                            comment.author = comments.getJSONObject(j).getJSONObject("from").getString("username");
+                            comment.text = comments.getJSONObject(j).getString("text");
+                            photo.comments.add(comment);
+                        }
+
                         // add decode object to photos
                         photos.add(photo);
                     }

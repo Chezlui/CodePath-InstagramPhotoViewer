@@ -27,7 +27,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         // get the data item for this position
         InstagramPhoto photo = getItem(position);
         // check if we are using a recycled view, if not we need to inflate
-        if(convertView == null) {
+        if (convertView == null) {
             // create a new view
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false);
         }
@@ -38,6 +38,11 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         TextView tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
         TextView tvCreatedTime = (TextView) convertView.findViewById(R.id.tvCreatedTime);
         ImageView ivUserAvatar = (ImageView) convertView.findViewById(R.id.ivUserAvatar);
+        TextView tvAuthorComment1 = (TextView) convertView.findViewById(R.id.tvAuthorComment1);
+        TextView tvAuthorComment2 = (TextView) convertView.findViewById(R.id.tvAuthorComment2);
+        TextView tvComment1 = (TextView) convertView.findViewById(R.id.tvComment1);
+        TextView tvComment2 = (TextView) convertView.findViewById(R.id.tvComment2);
+
         // insert the model data into each of the view items
         tvCaption.setText(photo.caption);
         tvUserName.setText(photo.userName);
@@ -48,14 +53,28 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
         // clear out the avatar view
         ivUserAvatar.setImageResource(0);
+
         // insert the imageview using picasso
-        Picasso.with(getContext()).load(photo.userProfileImageUrl).into(ivUserAvatar);
+        Picasso.with(getContext()).load(photo.userProfileImageUrl)
+                .resize(150,150).placeholder(R.drawable.placeholder_avatar).into(ivUserAvatar);
         // clear out the image view
         ivPhoto.setImageResource(0);
         // insert the imageview using picasso
-        Picasso.with(getContext()).load(photo.imageUrl).into(ivPhoto);
-        // Return the created item as a view
+        Picasso.with(getContext()).load(photo.imageUrl).placeholder(R.drawable.placeholder).into(ivPhoto);
 
+        // Comments
+        if (photo.comments.size() > 0) {
+            Comment comment1 = photo.comments.get(photo.comments.size() - 1);
+            tvAuthorComment1.setText(comment1.author);
+            tvComment1.setText(comment1.text);
+        }
+        if (photo.comments.size() > 1) {
+            Comment comment2 = photo.comments.get(photo.comments.size() - 2);
+            tvAuthorComment2.setText(comment2.author);
+            tvComment2.setText(comment2.text);
+        }
+
+        // Return the created item as a view
         return convertView;
     }
 }

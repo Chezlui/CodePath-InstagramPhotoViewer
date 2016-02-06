@@ -1,5 +1,8 @@
 package es.quizit.chezlui.instagramphotoviewer;
 
+
+import java.util.ArrayList;
+
 /**
  * Created by chezlui on 05/02/16.
  */
@@ -11,4 +14,5 @@ public class InstagramPhoto {
     public int imageHeight;
     public int likesCount;
     public long creationTime;
+    public ArrayList<Comment> comments;
 }
