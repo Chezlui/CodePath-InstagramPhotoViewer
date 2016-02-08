@@ -79,6 +79,15 @@ public class PhotosActivity extends AppCompatActivity {
                         JSONObject photoJson = photosJson.getJSONObject(i);
                         // decode the attributes of Json
                         InstagramPhoto photo = new InstagramPhoto();
+                        String type = photoJson.getString("type");
+                        if (type.equals("image")) {
+                            photo.type = 0;
+                        } else if (type.equals("video")) {
+                            photo.type = 1;
+                            photo.videoUrl = photoJson.getJSONObject("videos").getJSONObject("low_resolution").getString("url");
+                        } else {
+                            continue;
+                        }
                         // - Author name { data => [x] => "user" =>"username" }
                         photo.userName = photoJson.getJSONObject("user").getString("username");
                         // - TYPE { data => [x] => "type" } ("image" or "video")

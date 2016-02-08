@@ -1,6 +1,7 @@
 package es.quizit.chezlui.instagramphotoviewer;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
@@ -9,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.squareup.picasso.Picasso;
 
@@ -34,6 +37,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
     @Bind (R.id.tvComment1) TextView tvComment1;
     @Bind (R.id.tvComment2) TextView tvComment2;
     @Bind (R.id.tvViewMoreComments) TextView tvViewMoreComments;
+    @Bind (R.id.vvVideo) VideoView vvVideo;
 
     public InstagramPhotosAdapter(Context context, List<InstagramPhoto> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
@@ -45,12 +49,32 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         // get the data item for this position
         final InstagramPhoto photo = getItem(position);
         // check if we are using a recycled view, if not we need to inflate
-        if (convertView == null) {
+        if (photo.type == 0) {
             // create a new view
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false);
+        } else {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_video, parent, false);
+
         }
 
         ButterKnife.bind(this, convertView);
+        if (photo.type == 1) {
+            vvVideo.setVideoPath(photo.videoUrl);
+            MediaController mediaController = new MediaController(getContext());
+            mediaController.setAnchorView(vvVideo);
+            vvVideo.setMediaController(mediaController);
+            vvVideo.requestFocus();
+            vvVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                // Close the progress bar and play the video
+                public void onPrepared(MediaPlayer mp) {
+                    vvVideo.start();
+                }
+            });
+        } else {
+            // insert the imageview using picasso
+            Picasso.with(getContext()).load(photo.imageUrl).placeholder(R.drawable.placeholder).into(ivPhoto);
+        }
+
         // insert the model data into each of the view items
         tvCaption.setText(photo.caption);
         tvUserName.setText(photo.userName);
@@ -67,8 +91,6 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
                 .resize(150,150).placeholder(R.drawable.placeholder_avatar).into(ivUserAvatar);
         // clear out the image view
         ivPhoto.setImageResource(0);
-        // insert the imageview using picasso
-        Picasso.with(getContext()).load(photo.imageUrl).placeholder(R.drawable.placeholder).into(ivPhoto);
 
         // Comments
         if (photo.comments.size() > 0) {
