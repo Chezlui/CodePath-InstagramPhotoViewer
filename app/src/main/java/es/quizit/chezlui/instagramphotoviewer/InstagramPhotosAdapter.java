@@ -26,14 +26,15 @@ import butterknife.ButterKnife;
  */
 public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
     // lookups the views for populating the data (image, caption)
+    @Bind (R.id.tvAuthorPhotoCaption) TextView tvAuthorPhotoCaption;
     @Bind (R.id.tvCaption) TextView tvCaption;
     @Bind (R.id.tvUserName) TextView tvUserName;
     @Bind (R.id.ivPhoto) ImageView ivPhoto;
     @Bind (R.id.tvLikes) TextView tvLikes;
     @Bind (R.id.tvCreatedTime)TextView tvCreatedTime;
     @Bind (R.id.ivUserAvatar) ImageView ivUserAvatar;
-    @Bind (R.id.tvAuthorName) TextView tvAuthorComment1;
-    @Bind (R.id.tvAuthorComment2) TextView tvAuthorComment2;
+    @Bind (R.id.tvAuthorName1) TextView tvAuthorName1;
+    @Bind (R.id.tvAuthorName2) TextView tvAuthorName2;
     @Bind (R.id.tvComment1) TextView tvComment1;
     @Bind (R.id.tvComment2) TextView tvComment2;
     @Bind (R.id.tvViewMoreComments) TextView tvViewMoreComments;
@@ -77,6 +78,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
         // insert the model data into each of the view items
         tvCaption.setText(photo.caption);
+        tvAuthorPhotoCaption.setText(photo.userName);
         tvUserName.setText(photo.userName);
         tvLikes.setText(photo.likesCount + " likes");
         tvCreatedTime.setText(String.valueOf(DateUtils.
@@ -95,12 +97,12 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         // Comments
         if (photo.comments.size() > 0) {
             Comment comment1 = photo.comments.get(photo.comments.size() - 1);
-            tvAuthorComment1.setText(comment1.author);
+            tvAuthorName1.setText(comment1.author);
             tvComment1.setText(comment1.text);
         }
         if (photo.comments.size() > 1) {
             Comment comment2 = photo.comments.get(photo.comments.size() - 2);
-            tvAuthorComment2.setText(comment2.author);
+            tvAuthorName2.setText(comment2.author);
             tvComment2.setText(comment2.text);
         }
 

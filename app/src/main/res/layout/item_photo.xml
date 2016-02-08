@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -22,45 +23,64 @@
         android:layout_height="240dp"
         android:layout_below="@+id/tvUserName"
         android:layout_centerInParent="true"
-        android:visibility="gone"
-        />
+        android:visibility="gone"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test"
-        android:id="@+id/tvCaption"
-        android:textIsSelectable="false"
-        android:textSize="20sp"
-        android:maxLines="3"
-        android:ellipsize="end"
+        tools:text="Photo Author"
+        android:id="@+id/tvAuthorPhotoCaption"
         android:layout_below="@+id/tvLikes"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/instagram"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comment"
+        android:id="@+id/tvCaption"
+        android:layout_marginLeft="8dp"
+        android:textIsSelectable="false"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:layout_alignTop="@id/tvAuthorPhotoCaption"
+        android:layout_toRightOf="@id/tvAuthorPhotoCaption"
+        android:layout_toEndOf="@id/tvAuthorPhotoCaption"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Author"
         android:id="@+id/tvUserName"
+        android:paddingTop="7dp"
+        android:textColor="@color/instagram"
         android:layout_alignBottom="@+id/ivUserAvatar"
-        android:layout_toRightOf="@+id/ivUserAvatar"
-        android:layout_toEndOf="@+id/ivUserAvatar" />
+        android:layout_alignTop="@id/ivUserAvatar"
+        android:layout_toRightOf="@id/ivUserAvatar"
+        android:layout_toEndOf="@id/ivUserAvatar" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
         android:text="2 days ago"
         android:id="@+id/tvCreatedTime"
-        android:layout_above="@+id/ivPhoto"
+        android:paddingTop="7dp"
+        android:layout_alignTop="@id/ivUserAvatar"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
         android:text="20 likes"
         android:id="@+id/tvLikes"
+        android:textColor="@color/instagram"
         android:layout_below="@+id/ivPhoto"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -86,10 +106,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="First Author"
-        android:id="@+id/tvAuthorName"
+        android:id="@+id/tvAuthorName1"
         android:layout_below="@+id/tvCaption"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:textColor="@color/instagram"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:textStyle="bold" />
 
@@ -97,10 +119,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Second author"
-        android:id="@+id/tvAuthorComment2"
+        android:id="@+id/tvAuthorName2"
         android:layout_below="@+id/tvComment1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:textColor="@color/instagram"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:textStyle="bold" />
 
@@ -111,9 +135,9 @@
         android:id="@+id/tvComment1"
         android:maxLines="3"
         android:ellipsize="end"
-        android:layout_alignTop="@+id/tvAuthorName"
-        android:layout_toRightOf="@+id/tvUserName"
-        android:layout_toEndOf="@+id/tvUserName"
+        android:layout_alignTop="@id/tvAuthorName1"
+        android:layout_toRightOf="@id/tvAuthorName1"
+        android:layout_toEndOf="@id/tvAuthorName1"
         android:layout_marginLeft="8dp" />
 
     <TextView
@@ -123,9 +147,9 @@
         android:id="@+id/tvComment2"
         android:maxLines="3"
         android:ellipsize="end"
-        android:layout_alignTop="@+id/tvAuthorComment2"
-        android:layout_toRightOf="@+id/tvAuthorComment2"
-        android:layout_toEndOf="@+id/tvAuthorComment2"
+        android:layout_alignTop="@id/tvAuthorName2"
+        android:layout_toRightOf="@id/tvAuthorName2"
+        android:layout_toEndOf="@id/tvAuthorName2"
         android:layout_marginLeft="8dp" />
 
     <TextView
@@ -137,6 +161,7 @@
         android:textColor="@android:color/holo_blue_dark"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
