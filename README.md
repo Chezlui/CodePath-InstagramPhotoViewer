@@ -24,8 +24,7 @@ The following **optional** features are implemented:
 
 The following **bonus** features are implemented:
 
-* [ ] Show last 2 comments for each photo
-* [ ] Allow user to view all comments for an image within a separate activity or dialog fragment
+* [x] Allow user to view all comments for an image within a separate activity or dialog fragment
 * [ ] Allow video posts to be played in full-screen using the VideoView
 
 The following **additional** features are implemented:
@@ -44,6 +43,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 It was handy finding a class, DateUtils, that give you the relative time that's been passed since a creation date.
 Firstly I implemented RoundedImageView leveraging on the RoundedTransformationBuilder that is packed with the library and can be used in conjunction with Picasso. The problem was that it didn't look quite well since while the avatar was loading the Placeholder appeared like an square image.
+I had problems adding views programatically to a LinearLayout because during inflation I was using the rootView as an argument for the next sentence: commentRowView = getLayoutInflater(savedInstanceState).inflate(R.layout.row_comment, null);
 
 
 ## Open-source libraries used

@@ -1,6 +1,8 @@
 package es.quizit.chezlui.instagramphotoviewer;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +27,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // get the data item for this position
-        InstagramPhoto photo = getItem(position);
+        final InstagramPhoto photo = getItem(position);
         // check if we are using a recycled view, if not we need to inflate
         if (convertView == null) {
             // create a new view
@@ -38,10 +40,11 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         TextView tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
         TextView tvCreatedTime = (TextView) convertView.findViewById(R.id.tvCreatedTime);
         ImageView ivUserAvatar = (ImageView) convertView.findViewById(R.id.ivUserAvatar);
-        TextView tvAuthorComment1 = (TextView) convertView.findViewById(R.id.tvAuthorComment1);
+        TextView tvAuthorComment1 = (TextView) convertView.findViewById(R.id.tvAuthorName);
         TextView tvAuthorComment2 = (TextView) convertView.findViewById(R.id.tvAuthorComment2);
         TextView tvComment1 = (TextView) convertView.findViewById(R.id.tvComment1);
         TextView tvComment2 = (TextView) convertView.findViewById(R.id.tvComment2);
+        TextView tvViewMoreComments = (TextView) convertView.findViewById(R.id.tvViewMoreComments);
 
         // insert the model data into each of the view items
         tvCaption.setText(photo.caption);
@@ -74,7 +77,25 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
             tvComment2.setText(comment2.text);
         }
 
+        if (photo.comments.size() > 2) {
+            tvViewMoreComments.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showCommentsDialog(photo);
+                }
+            });
+        } else {
+            tvViewMoreComments.setVisibility(View.GONE);
+        }
+
         // Return the created item as a view
         return convertView;
+    }
+
+    private void showCommentsDialog(InstagramPhoto photo) {
+        FragmentManager fm = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+        CommentsDialog commentsDialog = CommentsDialog.newInstance(photo.comments);
+        commentsDialog.show(fm, "fragment_edit_name");
+
     }
 }

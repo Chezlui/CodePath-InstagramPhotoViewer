@@ -77,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="First Author"
-        android:id="@+id/tvAuthorComment1"
+        android:id="@+id/tvAuthorName"
         android:layout_below="@+id/tvCaption"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -102,7 +102,7 @@
         android:id="@+id/tvComment1"
         android:maxLines="3"
         android:ellipsize="end"
-        android:layout_alignTop="@+id/tvAuthorComment1"
+        android:layout_alignTop="@+id/tvAuthorName"
         android:layout_toRightOf="@+id/tvUserName"
         android:layout_toEndOf="@+id/tvUserName"
         android:layout_marginLeft="8dp" />
@@ -118,5 +118,17 @@
         android:layout_toRightOf="@+id/tvAuthorComment2"
         android:layout_toEndOf="@+id/tvAuthorComment2"
         android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View more"
+        android:id="@+id/tvViewMoreComments"
+        android:layout_below="@+id/tvComment2"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
