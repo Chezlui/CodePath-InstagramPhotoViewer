@@ -10,10 +10,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by chezlui on 07/02/16.
  */
 public class CommentsDialog extends DialogFragment {
+    @Bind (R.id.tvAuthorName) TextView tvAuthor;
+    @Bind (R.id.tvComment) TextView tvComment;
 
     public CommentsDialog() {
 
@@ -45,11 +50,9 @@ public class CommentsDialog extends DialogFragment {
 
         View commentRowView;
 
-
         while(itComments.hasNext()) {
             commentRowView = getLayoutInflater(savedInstanceState).inflate(R.layout.row_comment, null);
-            TextView tvAuthor = (TextView) commentRowView.findViewById(R.id.tvAuthorName);
-            TextView tvComment = (TextView) commentRowView.findViewById(R.id.tvComment);
+            ButterKnife.bind(this, commentRowView);
 
             Comment comment = itComments.next();
             tvAuthor.setText(comment.author);

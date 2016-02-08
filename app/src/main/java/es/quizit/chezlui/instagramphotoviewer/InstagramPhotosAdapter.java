@@ -15,10 +15,26 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by chezlui on 05/02/16.
  */
 public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
+    // lookups the views for populating the data (image, caption)
+    @Bind (R.id.tvCaption) TextView tvCaption;
+    @Bind (R.id.tvUserName) TextView tvUserName;
+    @Bind (R.id.ivPhoto) ImageView ivPhoto;
+    @Bind (R.id.tvLikes) TextView tvLikes;
+    @Bind (R.id.tvCreatedTime)TextView tvCreatedTime;
+    @Bind (R.id.ivUserAvatar) ImageView ivUserAvatar;
+    @Bind (R.id.tvAuthorName) TextView tvAuthorComment1;
+    @Bind (R.id.tvAuthorComment2) TextView tvAuthorComment2;
+    @Bind (R.id.tvComment1) TextView tvComment1;
+    @Bind (R.id.tvComment2) TextView tvComment2;
+    @Bind (R.id.tvViewMoreComments) TextView tvViewMoreComments;
+
     public InstagramPhotosAdapter(Context context, List<InstagramPhoto> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
     }
@@ -33,19 +49,8 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
             // create a new view
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false);
         }
-        // lookups the views for populating the data (image, caption)
-        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
-        TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUserName);
-        ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
-        TextView tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
-        TextView tvCreatedTime = (TextView) convertView.findViewById(R.id.tvCreatedTime);
-        ImageView ivUserAvatar = (ImageView) convertView.findViewById(R.id.ivUserAvatar);
-        TextView tvAuthorComment1 = (TextView) convertView.findViewById(R.id.tvAuthorName);
-        TextView tvAuthorComment2 = (TextView) convertView.findViewById(R.id.tvAuthorComment2);
-        TextView tvComment1 = (TextView) convertView.findViewById(R.id.tvComment1);
-        TextView tvComment2 = (TextView) convertView.findViewById(R.id.tvComment2);
-        TextView tvViewMoreComments = (TextView) convertView.findViewById(R.id.tvViewMoreComments);
 
+        ButterKnife.bind(this, convertView);
         // insert the model data into each of the view items
         tvCaption.setText(photo.caption);
         tvUserName.setText(photo.userName);

@@ -32,6 +32,8 @@ dependencies {
     compile 'com.android.support:support-v4:23.1.1'
     // Rounded Image view
     compile 'com.makeramen:roundedimageview:2.2.1'
+    // Butterknife
+    compile 'com.jakewharton:butterknife:7.0.1'
 
 
 }
